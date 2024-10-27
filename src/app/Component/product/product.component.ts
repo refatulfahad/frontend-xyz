@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { selectProduct, selectTotalProduct } from '../../State/product.selectors';
 import { Product } from '../../Model/class';
 import { loadProduct } from '../../State/product.action';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -31,8 +32,10 @@ export class ProductComponent implements OnInit {
   backProd: any[] = [];
   loadProducts$?: Observable<Product[]>;
   totalProducts$: Observable<number>;
+  imageUrl: any;
 
-  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService, private store: Store) {
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService, private store: Store,private productService: ProductService)
+   {
     this.loadProducts$ = this.store.select(selectProduct);
     this.totalProducts$ = this.store.select(selectTotalProduct);
   }
@@ -50,6 +53,14 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts(this.pageIndex, this.pageSize);
+    this.productService.fetchImageWithDebug().subscribe({
+      next:(res)=>{
+        this.imageUrl = res;
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    });
   }
 
   fetchProducts(index: number, size: number): void {

@@ -7,7 +7,7 @@
     <div *ngIf="loading" class="loading-indicator">
       <p>Loading products...</p>
     </div>
-
+    <!-- <img src="{{imageUrl}}" alt="car" style="width: 200px; height: auto;"> -->
     <div *ngIf="!loading" class="product-card-container">
       <app-product-card *ngFor="let item of loadProducts$ | async" [product]="item" (cardClick)="viewProductDetails($event)"></app-product-card>
     </div>

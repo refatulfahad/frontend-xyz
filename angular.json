@@ -72,7 +72,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 3001,
-            "proxyConfig": "src/proxy.conf.mjs"
+            "proxyConfig": "proxy.config.json"
           },
           "configurations": {
             "production": {
