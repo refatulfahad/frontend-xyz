@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -11,7 +12,7 @@ export class ProductService {
 
     getProducts(pageIndex: number, pageSize: number) {
         const skip = pageIndex * pageSize;
-        const resourceUrl: string = `https://dummyjson.com/products?limit=${pageSize}&skip=${skip}&select=brand,title,category,description,price,images,stock`;
+        const resourceUrl: string = `${environment.baseAPI}Product`;
         return this.http.get(resourceUrl);
     }
 
@@ -20,7 +21,6 @@ export class ProductService {
         pipe(
             map(response =>{
                 const blob = new Blob([response], { type: 'image/jpeg' });
-                debugger
                 return URL.createObjectURL(blob);
             })
         );

@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
   loadProducts$?: Observable<Product[]>;
   totalProducts$: Observable<number>;
   imageUrl: any;
+  products: any;
 
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService, private store: Store,private productService: ProductService)
    {
@@ -53,14 +54,20 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProducts(this.pageIndex, this.pageSize);
-    this.productService.fetchImageWithDebug().subscribe({
+    this.productService.getProducts(0,0).subscribe({
       next:(res)=>{
-        this.imageUrl = res;
-      },
-      error:(err)=>{
-        console.log(err);
+          this.products = res;
       }
     });
+    
+    // this.productService.fetchImageWithDebug().subscribe({
+    //   next:(res)=>{
+    //     this.imageUrl = res;
+    //   },
+    //   error:(err)=>{
+    //     console.log(err);
+    //   }
+    // });
   }
 
   fetchProducts(index: number, size: number): void {

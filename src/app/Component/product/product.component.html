@@ -9,7 +9,7 @@
     </div>
     <!-- <img src="{{imageUrl}}" alt="car" style="width: 200px; height: auto;"> -->
     <div *ngIf="!loading" class="product-card-container">
-      <app-product-card *ngFor="let item of loadProducts$ | async" [product]="item" (cardClick)="viewProductDetails($event)"></app-product-card>
+      <app-product-card *ngFor="let item of products" [product]="item" (cardClick)="viewProductDetails($event)"></app-product-card>
     </div>
 
     <mat-paginator *ngIf="!loading" [length]="totalProducts$|async"
