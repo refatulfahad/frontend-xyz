@@ -12,6 +12,10 @@ export const authGuard: CanActivateFn = (route, state) => {
   if(localData!=null){
     return true;
   }
+  else if(route.routeConfig?.path === 'auth_redirect'){
+    router.navigate(['/auth_redirect']);
+    return false;
+  }
   else{
     router.navigate(['/signup-login']);
     return false;

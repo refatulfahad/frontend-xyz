@@ -7,6 +7,7 @@ import { HttpClient, HttpClientModule ,provideHttpClient,withFetch } from '@angu
 import { LoginModel, SignUpModel } from '../../Model/class';
 import { MixpanelService } from '../../Shared/Services/mixpanel.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-signup-login',
@@ -25,7 +26,8 @@ export class SignupLoginComponent {
   constructor(
     private router: Router,
     private mixpanelService: MixpanelService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private productService: ProductService,
   ){}
   
   showSuccess() {
@@ -88,7 +90,10 @@ export class SignupLoginComponent {
      
     }
   }
-  
+
+  onKeycloakAuthRedirect(){
+     this.productService.authenticateWithKeycloak();
+  }
 }
 
 

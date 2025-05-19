@@ -10,6 +10,7 @@ import { CheckoutSuccessComponent } from './Component/checkout-success/checkout-
 import { authGuard } from './Services/auth.guard';
 import { loginGuard } from './Services/login.guard';
 import { AddProductComponent } from './Component/product/add-product/add-product.component';
+import { LoadingComponent } from './Component/loading/loading.component';
 
 export const routes: Routes = [
     {
@@ -57,6 +58,10 @@ export const routes: Routes = [
                 path:'checkout-success',
                 component:CheckoutSuccessComponent,
                 canActivate: [authGuard],
+            },
+            {
+                path:'auth_redirect',
+                component:LoadingComponent
             }
         ]
     },

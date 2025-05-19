@@ -53,10 +53,11 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchProducts(this.pageIndex, this.pageSize);
+    //this.fetchProducts(this.pageIndex, this.pageSize);
     this.productService.getProducts(0,0).subscribe({
       next:(res)=>{
           this.products = res;
+          this.loading = false;
       }
     });
     

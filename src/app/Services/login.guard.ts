@@ -11,5 +11,9 @@ export const loginGuard: CanActivateFn = (route, state) => {
     router.navigate(['/products']);
     return false; 
   }
+  else if(route.routeConfig?.path === 'auth_redirect'){
+    router.navigate(['/auth_redirect']);
+    return false;
+  }
   return true; 
 };

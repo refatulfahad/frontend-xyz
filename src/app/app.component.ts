@@ -25,9 +25,9 @@ export class AppComponent implements OnInit{
       const loggedUser = localStorage.getItem('loggedUser');
       this.isLoggedIn = !!loggedUser;
 
-      if (!this.isLoggedIn) {
-        this.router.navigate(['/signup-login']);
-      }
+      // if (!this.isLoggedIn) {
+      //   this.router.navigate(['/signup-login']);
+      // }
     }
   }
 }

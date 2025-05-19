@@ -20,6 +20,8 @@
 
                         <button (click)="onRegister()">Sign Up</button>
 
+                        <button (click)="onKeycloakAuthRedirect()">Login With Keycloak</button>
+
                     </form>
 
                 </div>
@@ -56,6 +58,7 @@
                             <h1>Hello, Friend!</h1>
                             <p>Register with your personal details to use all of site features</p>
                             <button class="hidden" id="register" (click)="isSignDivVisiable = true">Sign Up</button>
+                            <button class="hidden" (click)="isSignDivVisiable = true">Login With Keycloak</button>
                         </div>
                     </div>
                 </div>
