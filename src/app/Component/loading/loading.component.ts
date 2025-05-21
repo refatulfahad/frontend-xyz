@@ -17,13 +17,11 @@ export class LoadingComponent {
     private router: Router,
     private http: HttpClient
   ) { }
-  ngOnInit(): void {debugger
+  ngOnInit(): void {
     const code = this.route.snapshot.queryParamMap.get('code');
     if (code) {
       this.productService.exchangeCodeForToken(code).subscribe({
         next: (res) => {
-          console.log('Token received:', res);
-          debugger
           localStorage.setItem('loggedUser', JSON.stringify(res));
           this.router.navigate(['/products']);
         },
