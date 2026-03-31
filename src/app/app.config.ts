@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
@@ -15,6 +15,7 @@ import localForage from 'localforage';
 import { provideEffects } from '@ngrx/effects';
 import { ProductsEffects } from './State/products.effects';
 import { productReducer } from './State/product.reducer';
+import { jwtInterceptor } from './Core/Interceptors/jwt.interceptor';
 
 const reducers = {
   cart: cartReducer,
@@ -22,7 +23,7 @@ const reducers = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([jwtInterceptor])),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
