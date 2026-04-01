@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../Services/product.service';
-import { HttpClient } from '@angular/common/http';
+import { KeycloakAuthService } from '../../Services/keycloak-auth.service';
 
 @Component({
   selector: 'app-loading',
@@ -10,17 +9,15 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './loading.component.html',
   styleUrl: './loading.component.css'
 })
-export class LoadingComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService,
-    private router: Router,
-    private http: HttpClient
-  ) { }
+export class LoadingComponent implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly keycloakAuthService = inject(KeycloakAuthService);
+
   ngOnInit(): void {
     const code = this.route.snapshot.queryParamMap.get('code');
     if (code) {
-      this.productService.exchangeCodeForToken(code).subscribe({
+      this.keycloakAuthService.exchangeCodeForToken(code).subscribe({
         next: (res) => {
           localStorage.setItem('loggedUser', JSON.stringify(res));
           this.router.navigate(['/products']);
@@ -29,12 +26,6 @@ export class LoadingComponent {
           console.error('Error exchanging code for token:', err);
         }
       });
-      // const pageSize = 10, pageIndex = 0;
-      // const skip = pageIndex * pageSize;
-      // const apiUrl = `/products?limit=${pageSize}&skip=${skip}&select=brand,title,category,description,price,images,stock`;
-      // this.http.get(`${apiUrl}`).subscribe((response: any) => {
-      //   debugger;
-      // });
     }
   }
 }

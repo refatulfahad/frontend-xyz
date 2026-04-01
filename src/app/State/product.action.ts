@@ -18,7 +18,7 @@ export const loadProduct = createAction(
 
 export const loadProductSuccess = createAction(
     '[Products API] Products Loaded Success',
-    props<{ products: Product[], totalItems: 0 }>()
+    props<{ products: Product[], totalItems: number }>()
 );
 
 export const loadProductFailure = createAction(

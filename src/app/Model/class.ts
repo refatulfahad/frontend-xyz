@@ -23,35 +23,37 @@ export class SignUpModel {
     title: string;
     price: number;
     count: number;
-    category?: string; 
-    images?: string[]; 
+    category?: string;
+    images?: string[];
   }
-  
+
   export interface CartStore {
     cartCount: number;
     totalPrice: number;
     cartItems: CartItem[];
   }
-  
-  export class Product {
+
+  export interface Product {
     id: number;
     brand: string;
-    title:string;
+    title: string;
     category: string;
-    description:string;
+    description: string;
     price: string;
     images: string;
     stock: string;
+  }
 
-    constructor(){
-     this.id=0;
-     this.brand="";
-     this.title="";
-     this.category="";
-     this.description="";
-     this.price="";
-     this.images="";
-     this.stock="";
-    }
+  export interface ProductsResponse {
+    products: Product[];
+    total: number;
+  }
+
+  export interface TokenResponse {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    refresh_token?: string;
+    id_token?: string;
   }
   
