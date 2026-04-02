@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
   productList: any[] = [];
   loading: boolean = true;
   searchQuery: string = '';
-  apiUrl = environment.baseAPI;
   backProd: any[] = [];
   loadProducts$?: Observable<Product[]>;
   totalProducts$: Observable<number>;
@@ -54,7 +53,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     //this.fetchProducts(this.pageIndex, this.pageSize);
-    this.productService.getProducts(0,0).subscribe({
+    this.productService.getProducts(0,10).subscribe({
       next:(res)=>{
           this.products = res;
           this.loading = false;

@@ -14,6 +14,6 @@ export class ProductService {
         const params = new HttpParams()
             .set('limit', pageSize)
             .set('skip', pageIndex * pageSize);
-        return this.http.get<ProductsResponse>(`${environment.baseAPI}api/Product`, { params });
+        return this.http.get<ProductsResponse>('/products', { params });
     }
 }
