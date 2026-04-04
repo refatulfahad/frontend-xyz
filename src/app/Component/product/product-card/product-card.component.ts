@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../../State/product.action';
+import { ProductService } from '../../../Services/product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -17,22 +18,38 @@ import { addToCart } from '../../../State/product.action';
 export class ProductCardComponent {
   @Input() product: any;
   @Output() cardClick = new EventEmitter<number>();
+  @Output() deleted = new EventEmitter<void>();
   count: number = 1;
-  constructor(private cartService: CartService,
-    private mixpanelService: MixpanelService,
-    private router: Router,
-    private toastr: ToastrService,
-    private store: Store
-  ) { }
 
-  addToCart(cartItem: any, event: Event) {
+  constructor(
+    private readonly cartService: CartService,
+    private readonly mixpanelService: MixpanelService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
+    private readonly store: Store,
+    private readonly productService: ProductService
+  ) {}
+
+  addToCart(cartItem: any, event: Event): void {
     event.stopPropagation();
     this.cartService.addToCart(this.product, this.count);
-    // this.count = 1;
     this.toastr.success('Addtocart Success');
     this.store.dispatch(addToCart({ cartItem }));
   }
-  onCardClick() {
+
+  onCardClick(): void {
     this.cardClick.emit(this.product.id);
+  }
+
+  onEdit(event: Event): void {
+    event.stopPropagation();
+    this.router.navigate(['/products/edit', this.product.id]);
+  }
+
+  onDelete(event: Event): void {
+    event.stopPropagation();
+    this.productService.deleteProduct(this.product.id).subscribe(() => {
+      this.deleted.emit();
+    });
   }
 }

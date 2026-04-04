@@ -45,6 +45,11 @@ export const routes: Routes = [
                 canActivate: [authGuard],
             },
             {
+                path:'products/edit/:id',
+                component:AddProductComponent,
+                canActivate: [authGuard],
+            },
+            {
                 path:'addtocart',
                 component:AddToCartComponent,
                 canActivate: [authGuard],

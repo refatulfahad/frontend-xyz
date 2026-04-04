@@ -1,9 +1,12 @@
 <div class="product-card" (click)="onCardClick()">
-    <img [src]="product.images[0]" alt="Product Image" class="product-image">
+    <img [src]="product.imageUrl" alt="Product Image" class="product-image">
     <div class="product-info">
-      <h3 class="product-title">{{ product.title }}</h3>
-      <span class="product-price">{{ product.price}}</span>
-      <button class="btn btn-primary" (click)="addToCart(product,$event)">Add to Cart</button>
+      <h3 class="product-title">{{ product.name }}</h3>
+      <span class="product-price">{{ product.price }}</span>
+      <div class="product-actions">
+        <button class="btn btn-primary" (click)="addToCart(product, $event)">Add to Cart</button>
+        <button class="btn btn-secondary" (click)="onEdit($event)">Edit</button>
+        <button class="btn btn-danger" (click)="onDelete($event)">Delete</button>
+      </div>
     </div>
 </div>
-  

@@ -7,8 +7,8 @@ export default [
     logLevel: 'debug'
   },
   {
-    context: ['/products*'],
-    target: 'https://localhost:7200/',
+    context: ['/api'],
+    target: 'https://localhost:7200',
     secure: false,
     changeOrigin: true,
     logLevel: 'debug'

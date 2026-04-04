@@ -8,7 +8,7 @@ export class MixpanelService {
 
   constructor() {
     //daa76dd6afd4babe15f321a4e77a3ded  -me
-    //874f28d8800d06ca29cf542aa0b618ad  -bhai
+    //874f28d8800d06ca29cf542aa0b618ad  -Al-Amin bhai
     mixpanel.init('874f28d8800d06ca29cf542aa0b618ad', {
       api_host: "http://localhost:3001",
       debug: true,

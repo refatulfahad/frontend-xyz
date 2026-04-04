@@ -35,18 +35,24 @@ export class SignUpModel {
 
   export interface Product {
     id: number;
-    brand: string;
-    title: string;
-    category: string;
+    name?: string;
     description: string;
-    price: string;
-    images: string;
-    stock: string;
+    price: number;
+    stock: number;
+    imageUrl?: string;
   }
 
   export interface ProductsResponse {
     products: Product[];
     total: number;
+  }
+
+  export interface ProductRequest {
+    name: string;
+    description: string;
+    price: number;
+    stock: number;
+    imageUrl: string;
   }
 
   export interface TokenResponse {

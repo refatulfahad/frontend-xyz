@@ -1,32 +1,28 @@
 <div class="col-md-6">
-    <h3>{{ productOBJ?.id ? 'Edit Product' : 'Add Product' }}</h3>
+    <h3>{{ editId ? 'Edit Product' : 'Add Product' }}</h3>
     <form>
       <div class="form-group">
-        <label for="brand">Brand</label>
-        <input type="text" id="brand" class="form-control" [(ngModel)]="productOBJ.brand" name="brand" required />
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="productForm.name" name="name" required />
       </div>
       <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" id="title" class="form-control" [(ngModel)]="productOBJ.title" name="title" required />
-      </div>
-      <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" id="category" class="form-control" [(ngModel)]="productOBJ.category" name="category" required />
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" [(ngModel)]="productForm.description" name="description" required />
       </div>
       <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" id="price" class="form-control" [(ngModel)]="productOBJ.price" name="price" required />
+        <input type="number" id="price" class="form-control" [(ngModel)]="productForm.price" name="price" required />
       </div>
       <div class="form-group">
         <label for="stock">Stock</label>
-        <input type="number" id="stock" class="form-control" [(ngModel)]="productOBJ.stock" name="stock" required />
+        <input type="number" id="stock" class="form-control" [(ngModel)]="productForm.stock" name="stock" required />
       </div>
       <div class="form-group">
-        <label for="images">Images (comma separated URLs)</label>
-        <input type="text" id="images" class="form-control" [(ngModel)]="productOBJ.images" name="images" required />
+        <label for="imageUrl">Image URL</label>
+        <input type="text" id="imageUrl" class="form-control" [(ngModel)]="productForm.imageUrl" name="imageUrl" />
       </div>
-      <button *ngIf="!productOBJ.id" type="button" class="btn btn-success" (click)="createProduct()">Add Product</button>
-      <button class="btn btn-secondary" (click)="goBack()">Back to List</button>
+      <button type="button" class="btn btn-success" (click)="save()">{{ editId ? 'Update' : 'Add' }} Product</button>
+      <button type="button" class="btn btn-secondary" (click)="goBack()">Back to List</button>
     </form>
   </div>
   

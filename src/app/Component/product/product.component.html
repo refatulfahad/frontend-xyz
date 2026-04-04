@@ -1,18 +1,28 @@
 
- <div class="container" >
-    <div class="search-container">
-      <input type="text" [(ngModel)]="searchQuery" placeholder="Search products..." (input)="onSearch()" class="search-box"/>
+<div class="container">
+    <div class="header-actions">
+      <a routerLink="/products/add" class="btn btn-primary">+ Add Product</a>
     </div>
 
-    <div *ngIf="loading" class="loading-indicator">
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name..." (input)="onSearch()" class="search-box"/>
+      <input type="number" [(ngModel)]="minPrice" placeholder="Min price" (input)="onSearch()" class="price-box"/>
+      <input type="number" [(ngModel)]="maxPrice" placeholder="Max price" (input)="onSearch()" class="price-box"/>
+    </div>
+
+    <div *ngIf="loading$ | async" class="loading-indicator">
       <p>Loading products...</p>
     </div>
-    <!-- <img src="{{imageUrl}}" alt="car" style="width: 200px; height: auto;"> -->
-    <div *ngIf="!loading" class="product-card-container">
-      <app-product-card *ngFor="let item of products" [product]="item" (cardClick)="viewProductDetails($event)"></app-product-card>
+
+    <div *ngIf="!(loading$ | async)" class="product-card-container">
+      <app-product-card *ngFor="let item of products" [product]="item"
+        (cardClick)="viewProductDetails($event)"
+        (deleted)="dispatchLoad()">
+      </app-product-card>
     </div>
 
-    <mat-paginator *ngIf="!loading" [length]="totalProducts$|async"
+    <mat-paginator *ngIf="!(loading$ | async)"
+                  [length]="totalProducts$ | async"
                   [pageSize]="pageSize"
                   [pageSizeOptions]="[5, 10, 25, 100]"
                   (page)="onPageChange($event)">

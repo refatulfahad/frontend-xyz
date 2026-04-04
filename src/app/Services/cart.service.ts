@@ -94,12 +94,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private cartSubject = new BehaviorSubject<number>(this.getTotalCount());
+  private cartSubject = new BehaviorSubject<number>(0);
   cartCount$ = this.cartSubject.asObservable();
-  private cart: any[] = JSON.parse(localStorage.getItem('cartItems') || '[]');
   private totalPrice = 0;
 
-  constructor(private mixpanelService: MixpanelService) {}
+  constructor(private mixpanelService: MixpanelService) {
+    this.cartSubject.next(this.getTotalCount());
+  }
 
   getCartItems() {
     return JSON.parse(localStorage.getItem('cartItems') || '[]');

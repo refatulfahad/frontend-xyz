@@ -5,32 +5,33 @@ import { createReducer, on } from "@ngrx/store";
 export interface ProductState {
     products: Product[],
     totalItems: number,
+    loading: boolean,
     error: string | null
 }
 export const initialState: ProductState = {
     products: [],
     totalItems: 0,
+    loading: false,
     error: ''
 };
 
 export const productReducer = createReducer(
     initialState,
-    on(loadProduct, (state) => {
-        return state;
-    }),
-    on(loadProductSuccess, (state, { products, totalItems }) => {
-        return {
-            ...state,
-            products,
-            totalItems,
-            error: null
-        };
-    }),
-    on(loadProductFailure, (state, { errorMessage }) => {
-
-        return {
-            ...state,
-            error: errorMessage
-        };
-    })
+    on(loadProduct, (state) => ({
+        ...state,
+        loading: true,
+        error: null
+    })),
+    on(loadProductSuccess, (state, { products, totalItems }) => ({
+        ...state,
+        products,
+        totalItems,
+        loading: false,
+        error: null
+    })),
+    on(loadProductFailure, (state, { errorMessage }) => ({
+        ...state,
+        loading: false,
+        error: errorMessage
+    }))
 );
