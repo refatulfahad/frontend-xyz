@@ -5,5 +5,5 @@ export const environment = {
     keycloakBaseUrl: 'https://keycloak-xyz.ambitiousglacier-652cfb90.southeastasia.azurecontainerapps.io',
     keycloakRealm: 'project-xyz',
     keycloakClientId: 'public-client',
-    keycloakRedirectUri: 'http://localhost:3001/auth_redirect',
+    keycloakRedirectUri: 'https://mango-field-0cea64400.7.azurestaticapps.net/auth_redirect',
 };
