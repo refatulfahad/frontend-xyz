@@ -22,7 +22,7 @@ export class KeycloakAuthService {
     }
 
     exchangeCodeForToken(code: string): Observable<TokenResponse> {
-        const { keycloakProxyPrefix, keycloakRealm, keycloakClientId, keycloakRedirectUri } = environment;
+        const { keycloakBaseUrl, keycloakRealm, keycloakClientId, keycloakRedirectUri } = environment;
         const body = new HttpParams()
             .set('grant_type', 'authorization_code')
             .set('client_id', keycloakClientId)
@@ -30,7 +30,7 @@ export class KeycloakAuthService {
             .set('redirect_uri', keycloakRedirectUri);
 
         return this.http.post<TokenResponse>(
-            `${keycloakProxyPrefix}/${keycloakRealm}/protocol/openid-connect/token`,
+            `${keycloakBaseUrl}/realms/${keycloakRealm}/protocol/openid-connect/token`,
             body
         );
     }
