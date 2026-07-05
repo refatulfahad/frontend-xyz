@@ -11,14 +11,14 @@ export class KeycloakAuthService {
     private readonly http = inject(HttpClient);
 
     authenticateWithKeycloak(): void {
-        const { keycloakBaseUrl, keycloakRealm, keycloakClientId, keycloakRedirectUri } = environment;
+        const { keycloakLoginUrl, keycloakRealm, keycloakClientId, keycloakRedirectUri } = environment;
         const queryStr = new HttpParams()
             .set('scope', 'openid')
             .set('response_type', 'code')
             .set('client_id', keycloakClientId)
             .set('redirect_uri', keycloakRedirectUri)
             .toString();
-        window.location.href = `${keycloakBaseUrl}/realms/${keycloakRealm}/protocol/openid-connect/auth?${queryStr}`;
+        globalThis.location.href = `${keycloakLoginUrl}/realms/${keycloakRealm}/protocol/openid-connect/auth?${queryStr}`;
     }
 
     exchangeCodeForToken(code: string): Observable<TokenResponse> {
