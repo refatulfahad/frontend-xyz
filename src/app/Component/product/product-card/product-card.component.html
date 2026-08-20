@@ -1,5 +1,5 @@
-<div class="product-card" (click)="onCardClick()">
-    <img [src]="product.imageUrl" alt="Product Image" class="product-image">
+<div class="product-card" (click)="onCardClick()" (keydown.enter)="onCardClick()">
+    <img [src]="product.imageUrl" alt="Product" class="product-image">
     <div class="product-info">
       <h3 class="product-title">{{ product.name }}</h3>
       <span class="product-price">{{ product.price }}</span>

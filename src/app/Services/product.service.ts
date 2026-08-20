@@ -31,11 +31,11 @@ export class ProductService {
         return this.http.get<Product[]>(`${environment.apiBaseUrl}/Product/search`, { params });
     }
 
-    createProduct(body: ProductRequest): Observable<Product> {
+    createProduct(body: FormData): Observable<Product> {
         return this.http.post<Product>(`${environment.apiBaseUrl}/Product`, body);
     }
 
-    updateProduct(id: number, body: ProductRequest): Observable<Product> {
+    updateProduct(id: number, body: FormData): Observable<Product> {
         return this.http.put<Product>(`${environment.apiBaseUrl}/Product/${id}`, body);
     }
 
