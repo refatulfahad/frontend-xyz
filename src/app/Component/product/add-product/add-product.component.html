@@ -1,28 +1,70 @@
-<div class="col-md-6">
-    <h3>{{ editId ? 'Edit Product' : 'Add Product' }}</h3>
-    <form>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" class="form-control" [(ngModel)]="productForm.name" name="name" required />
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" id="description" class="form-control" [(ngModel)]="productForm.description" name="description" required />
-      </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="number" id="price" class="form-control" [(ngModel)]="productForm.price" name="price" required />
-      </div>
-      <div class="form-group">
-        <label for="stock">Stock</label>
-        <input type="number" id="stock" class="form-control" [(ngModel)]="productForm.stock" name="stock" required />
-      </div>
-      <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input type="text" id="imageUrl" class="form-control" [(ngModel)]="productForm.imageUrl" name="imageUrl" />
-      </div>
-      <button type="button" class="btn btn-success" (click)="save()">{{ editId ? 'Update' : 'Add' }} Product</button>
-      <button type="button" class="btn btn-secondary" (click)="goBack()">Back to List</button>
-    </form>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control"
+      formControlName="name"
+    />
   </div>
-  
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      class="form-control"
+      formControlName="description"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input
+      type="number"
+      id="price"
+      class="form-control"
+      formControlName="price"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="stock">Stock</label>
+    <input
+      type="number"
+      id="stock"
+      class="form-control"
+      formControlName="stock"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="image">Product Image</label>
+
+    <input
+      type="file"
+      id="image"
+      class="form-control"
+      accept="image/*"
+      (change)="onImageSelected($event)"
+    />
+  </div>
+
+  @if (imagePreviewUrl) {
+    <div class="mt-3">
+      <p>Preview:</p>
+
+      <img
+        [src]="imagePreviewUrl"
+        alt="Product preview"
+        style="max-width: 300px; max-height: 300px;"
+      />
+    </div>
+  }
+
+  <button type="submit">
+    Save Product
+  </button>
+
+</form>

@@ -48,11 +48,11 @@ export class SignUpModel {
   }
 
   export interface ProductRequest {
-    name: string;
-    description: string;
-    price: number;
-    stock: number;
-    imageUrl: string;
+    name: string | null;
+    description: string | null;
+    price: number | null;
+    stock: number | null;
+    image: File | null;
   }
 
   export interface TokenResponse {
